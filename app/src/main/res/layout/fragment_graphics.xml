@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/board_background"
+    tools:context=".fragments.GraphicsFragment">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="139dp"
+        android:gravity="center_horizontal|fill_horizontal|center_vertical"
+        android:text="TextView"
+        tools:text= "1"/>
+</FrameLayout>

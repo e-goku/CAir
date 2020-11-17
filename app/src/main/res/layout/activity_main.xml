@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/city_or_station_name"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <ImageButton
+        android:id="@+id/ok_button"
+        android:layout_width="364dp"
+        android:layout_height="66dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/show_air_quality_btn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:orientation="horizontal"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+<!--    <fragment-->
+<!--        android:name="com.example.cair.fragments.XartisFragment"-->
+<!--        android:id="@+id/xartis"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="match_parent" />-->
+<!--    <fragment-->
+<!--        android:name="com.example.cair.fragments.InfoFragment"-->
+<!--        android:id="@+id/info"-->
+<!--        android:layout_weight="2"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="match_parent" />-->
+<!--    <fragment-->
+<!--        android:name="com.example.cair.fragments.GraphicsFragment"-->
+<!--        android:id="@+id/graphs"-->
+<!--        android:layout_weight="3"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="match_parent" />-->
+<!--</LinearLayout>-->
+<!--<LinearLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="vertical"-->
+<!--    tools:context=".MainActivity">-->
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabs"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:background="@color/green"-->
+<!--        app:tabIndicator="@color/blue_light"-->
+<!--        app:tabSelectedTextColor="@color/blue_light"-->
+<!--        app:tabTextColor="@color/grey_light" />-->
+
+<!--    <androidx.viewpager.widget.ViewPager-->
+<!--        android:id="@+id/viewPager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" >-->
+<!--    </androidx.viewpager.widget.ViewPager>-->
+<!--</LinearLayout>-->
