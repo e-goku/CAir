@@ -9,4 +9,7 @@
     <color name="blue">#1de9b6</color>
     <color name="blue_dark">#00b686</color>
     <color name="blue_light">#6effe8</color>
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
 </resources>

@@ -1,29 +1,30 @@
 package com.example.cair.adapters
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentPagerAdapter
+import com.example.cair.fragments.GrafimaFragment
+import com.example.cair.fragments.InfoFragment
 
-class FragmentAdapter(fm: FragmentManager) :
-    FragmentStatePagerAdapter(fm) {
-    private val fragmentList : MutableList<Fragment> = ArrayList()
-    private val titleList : MutableList<String> = ArrayList()
+@Suppress("DEPRECATION")
+
+internal class FragmentAdapter(
+    var context: Context,
+    fm: FragmentManager,
+    var totalTabs: Int
+) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        return fragmentList[position]
+        return when (position) {
+            0 -> { InfoFragment() }
+            1 -> { GrafimaFragment() }
+            else -> getItem(position)
+        }
     }
 
     override fun getCount(): Int {
-        return fragmentList.size
-    }
-
-    fun addFragment(fragment: Fragment, title : String){
-        fragmentList.add(fragment)
-        titleList.add(title)
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return titleList[position]
+        return totalTabs
     }
 }
 

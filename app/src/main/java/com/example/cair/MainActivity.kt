@@ -3,9 +3,9 @@ package com.example.cair
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cair.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -14,8 +14,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.okButton.setOnClickListener{sendCityName()}
+        val stringInTextField = binding.cityName.text
 
+        binding.okButton.setOnClickListener{
+            if (  stringInTextField.isNullOrBlank() ) {
+                Toast.makeText(applicationContext,"City or Station name cannot be empty",Toast.LENGTH_SHORT).show()
+            }
+            else{ sendCityName() }
+        }
     }
 
     /** Called when the user taps the OK button */
