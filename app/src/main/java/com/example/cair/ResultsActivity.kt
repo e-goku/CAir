@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
 import com.example.cair.adapters.FragmentAdapter
 import com.google.android.material.tabs.TabLayout
 
@@ -18,21 +15,6 @@ class ResultsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_results)
 
 
-        val city = intent.getStringExtra(AlarmClock.EXTRA_MESSAGE)
-
-        val url = "http://api.waqi.info/feed/$city/?token=77329dff03657c6b6620ceabb5f59f418ab9eaee"
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET, url, null,
-            Response.Listener { response ->
-                val sresponse = "Response: %s".format(response.toString())
-            },
-            Response.ErrorListener { error ->
-                val sresponse = "Something went wrong!"
-            }
-        )
-
-        // Access the RequestQueue through your singleton class.
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
 
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
@@ -51,12 +33,10 @@ class ResultsActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
+
+     fun getMyData(): String? {
+        return intent.getStringExtra(AlarmClock.EXTRA_MESSAGE)
+    }
 }
 
 
-
-
-
-
-
-   // private fun calculateAqi() {}

@@ -14,23 +14,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val stringInTextField = binding.cityName.text
 
-        binding.okButton.setOnClickListener{
-            if (  stringInTextField.isNullOrBlank() ) {
-                Toast.makeText(applicationContext,"City or Station name cannot be empty",Toast.LENGTH_SHORT).show()
-            }
-            else{ sendCityName() }
+        binding.okButton.setOnClickListener { buttonClick() }
+    }
+
+
+    private fun buttonClick() {
+        val stringInTextField = binding.locationEditText.text
+        if ( stringInTextField.isNullOrBlank()) {
+            Toast.makeText(applicationContext,"Location cannot be empty",Toast.LENGTH_SHORT).show()
         }
+        else{ sendCityName() }
     }
 
     /** Called when the user taps the OK button */
     private fun sendCityName() {
-        val message = binding.cityName.text.toString()
+        val message = binding.locationEditText.text.toString()
         val intent = Intent(this, ResultsActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, message)
         }
         startActivity(intent)
     }
+
+
 }
 

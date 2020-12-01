@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.cair.fragments.GrafimaFragment
 import com.example.cair.fragments.InfoFragment
 
+
 @Suppress("DEPRECATION")
 
 internal class FragmentAdapter(
