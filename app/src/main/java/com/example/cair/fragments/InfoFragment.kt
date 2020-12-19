@@ -32,6 +32,7 @@ class InfoFragment : Fragment() {
         val activity: ResultsActivity? = activity as ResultsActivity?
         val location: String? = activity?.getMyData()
 
+        //make a json request for the aqi results
         val url = "https://api.waqi.info/feed/$location/?token=77329dff03657c6b6620ceabb5f59f418ab9eaee"
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,

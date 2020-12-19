@@ -3,8 +3,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="city_or_station_name">City or Station name</string>
     <string name="ok">OK</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loading">Loading...</string>
     <string name="tip_of_the_day">Tip of the day</string>
-    <string name="location">Location</string>
+    <string name="search">Search Location</string>
+    <string name="api_key">AIzaSyDvabeJOdIEVJUCKznpCwuGlutGW27PuBQ</string>
 </resources>
