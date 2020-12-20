@@ -32,14 +32,16 @@ class InfoFragment : Fragment() {
         val activity: ResultsActivity? = activity as ResultsActivity?
         val location: String? = activity?.getMyData()
 
+        val urlPhoton="https://photon.komoot.io/api/?q=$location"
+
         //make a json request for the aqi results
-        val url = "https://api.waqi.info/feed/$location/?token=77329dff03657c6b6620ceabb5f59f418ab9eaee"
+        val url = "https://api.waqi.info/feed/geo:$location/?token=77329dff03657c6b6620ceabb5f59f418ab9eaee"
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
-            Response.Listener { response ->
+            { response ->
                 binding.aqi.text = "Response: %s".format(response.toString())
             },
-            Response.ErrorListener { error ->
+            { error ->
                 binding.aqi.text = "Something went wrong!\n Please try again!"
             }
         )

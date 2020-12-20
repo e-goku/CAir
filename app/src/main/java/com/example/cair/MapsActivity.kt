@@ -1,28 +1,34 @@
  package com.example.cair
 
  import android.Manifest
+ import android.content.Context
  import android.content.Intent
  import android.content.pm.PackageManager
  import android.content.res.Resources
+ import android.location.Criteria
  import android.location.Location
+ import android.location.LocationListener
+ import android.location.LocationManager
  import android.os.Bundle
  import android.provider.AlarmClock
  import android.util.Log
  import android.view.View
  import android.view.inputmethod.EditorInfo
  import android.widget.EditText
+ import android.widget.TextView
  import android.widget.Toast
  import androidx.appcompat.app.AppCompatActivity
  import androidx.core.app.ActivityCompat
  import androidx.core.content.ContextCompat
  import com.example.cair.databinding.ActivityMapsBinding
- import com.google.android.gms.maps.CameraUpdateFactory
- import com.google.android.gms.maps.GoogleMap
- import com.google.android.gms.maps.OnMapReadyCallback
- import com.google.android.gms.maps.SupportMapFragment
+ import com.google.android.gms.maps.*
+ import com.google.android.gms.maps.GoogleMap.OnMyLocationChangeListener
  import com.google.android.gms.maps.model.LatLng
  import com.google.android.gms.maps.model.MapStyleOptions
+ import com.google.android.gms.maps.model.Marker
  import com.google.android.gms.maps.model.MarkerOptions
+ import kotlinx.android.synthetic.main.activity_maps.*
+
 
 
  class MapsActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonClickListener,
@@ -30,10 +36,13 @@
     ActivityCompat.OnRequestPermissionsResultCallback {
 
     private lateinit var binding: ActivityMapsBinding
-    private lateinit var map: GoogleMap
     private val TAG = MapsActivity::class.java.simpleName
-     private val REQUEST_LOCATION_PERMISSION = 1
-     var mapView: View? = null
+    private val REQUEST_LOCATION_PERMISSION = 1
+    var mapView: View? = null
+    private lateinit var marker: Marker
+    //private var stopLocListener=0
+    private lateinit var map: GoogleMap
+
 
 
      override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,26 +52,26 @@
         setContentView(view)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-         mapView = mapFragment.view
+        mapView = mapFragment.view
 
-         mapFragment.getMapAsync(this)
+        mapFragment.getMapAsync(this)
 
 
-         
+
 
         binding.goButton.setOnClickListener { searchResults() }
 
 
-         //Handles the keyboard action button
-         findViewById<EditText>(R.id.location_edit_text).setOnEditorActionListener { v, actionId, event ->
-             return@setOnEditorActionListener when (actionId) {
-                 EditorInfo.IME_ACTION_SEARCH -> {
-                     searchResults()
-                     true
-                 }
-                 else -> false
-             }
-         }
+        //Handles the keyboard action button
+        findViewById<EditText>(R.id.location_edit_text).setOnEditorActionListener { v, actionId, event ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    searchResults()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     /**
@@ -84,14 +93,12 @@
         enableMyLocation()
 
 
-        // Add a marker in Volos and move the camera
-        val latitude = 39.36815553925427
-        val longitude = 22.948957502138782
-        val homeLatLng = LatLng(latitude, longitude)
-        val zoomLevel = 10f
-        map.addMarker(MarkerOptions().position(homeLatLng))
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
+
+        // getLatLng()
+
+
         setMapLongClick(map)
+
     }
 
     /**
@@ -100,12 +107,15 @@
      * if is send message "Location cannot be empty"
      * if not calls fun sendCityName()
      */
+
     private fun searchResults() {
         val stringInTextField = binding.locationEditText.text
-        if ( stringInTextField.isNullOrBlank()) {
-            Toast.makeText(applicationContext, "Location cannot be empty", Toast.LENGTH_SHORT).show()
+        if (stringInTextField.isNullOrBlank()) {
+            Toast.makeText(applicationContext, "Location cannot be empty", Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            sendCityName()
         }
-        else{ sendCityName() }
     }
 
     /** Starts the results activity  */
@@ -115,7 +125,7 @@
             putExtra(AlarmClock.EXTRA_MESSAGE, message)
         }
         startActivity(intent)
-   }
+    }
 
     /** Sets style for the map*/
     private fun setMapStyle(map: GoogleMap) {
@@ -136,55 +146,180 @@
         }
     }
 
+//     private fun getLatLng(){
+//             map.setOnMyLocationChangeListener(OnMyLocationChangeListener { loc ->
+//                 val latitude = loc.latitude
+//                 val longitude = loc.longitude
+//
+//                 val homeLatLng = LatLng(latitude, longitude)
+//                 val zoomLevel = 10f
+//                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
+//
+//                 binding.locationEditText.setText(
+//                     "$latitude;$longitude",
+//                     TextView.BufferType.EDITABLE
+//                 )
+//
+//                 return@OnMyLocationChangeListener
+//             })
+//
+//         return
+//     }
+
     /** On long click adds marker*/
     private fun setMapLongClick(map: GoogleMap) {
         map.setOnMapLongClickListener { latLng ->
-            map.addMarker(
-                MarkerOptions()
-                    .position(latLng)
+            marker = map.addMarker(MarkerOptions().position(latLng).title("Title"))
+            val position = marker.position
+            val latitude = position.latitude
+            val longitude = position.longitude
+
+            binding.locationEditText.setText("$latitude;$longitude", TextView.BufferType.EDITABLE)
+            marker.remove()
+            return@setOnMapLongClickListener
+        }
+
+
+
+    }
+
+    /**
+     * Enables the My Location layer if the fine location permission has been granted.
+     */
+    private fun enableMyLocation() {
+        if (!::map.isInitialized) return
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            map.isMyLocationEnabled = true
+        } else {
+            // Permission to access the location is missing. Show rationale and request permission
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_LOCATION_PERMISSION
             )
         }
     }
 
-     /**
-      * Enables the My Location layer if the fine location permission has been granted.
-      */
-     private fun enableMyLocation() {
-         if (!::map.isInitialized) return
-         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-             == PackageManager.PERMISSION_GRANTED) {
-             map.isMyLocationEnabled = true
-         } else {
-             // Permission to access the location is missing. Show rationale and request permission
-             ActivityCompat.requestPermissions(
-                 this,
-                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                 REQUEST_LOCATION_PERMISSION
-             )
-         }
-     }
+    override fun onMyLocationButtonClick(): Boolean {
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show()
+        // Return false so that we don't consume the event and the default behavior still occurs
+        // (the camera animates to the user's current position).
+        return false
+    }
 
-     override fun onMyLocationButtonClick(): Boolean {
-         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show()
-         // Return false so that we don't consume the event and the default behavior still occurs
-         // (the camera animates to the user's current position).
-         return false
-     }
+    override fun onMyLocationClick(location: Location) {
+        Toast.makeText(this, "Current location:\n$location", Toast.LENGTH_LONG).show()
+    }
 
-     override fun onMyLocationClick(location: Location) {
-         Toast.makeText(this, "Current location:\n$location", Toast.LENGTH_LONG).show()
-     }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
+                enableMyLocation()
+            }
+        }
+    }
+}
 
-     override fun onRequestPermissionsResult(
-         requestCode: Int,
-         permissions: Array<String>,
-         grantResults: IntArray
-     ) {
-             if (requestCode == REQUEST_LOCATION_PERMISSION) {
-                 if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
-                     enableMyLocation()
-                 }
-             }
-     }
- }
-
+// ///////////////////////class FollowMeLocationSource///////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////
+//
+// private class FollowMeLocationSource private constructor() : LocationSource, LocationListener {
+//     private var mListener: LocationSource.OnLocationChangedListener? = null
+//     private val locationManager: LocationManager
+//     private val criteria = Criteria()
+//     private var bestAvailableProvider: String? = null
+//     private val mContext: Context? = null
+//     private lateinit var map: GoogleMap
+//
+//
+//
+//     /* Updates are restricted to one every 10 seconds, and only when
+//          * movement of more than 10 meters has been detected.*/
+//     private val minTime  = 10000 // minimum time interval between location updates, in milliseconds
+//     private val minDistance = 10.0 // minimum distance between location updates, in meters
+//     private fun getBestAvailableProvider() {
+//         /* The preffered way of specifying the location provider (e.g. GPS, NETWORK) to use
+//              * is to ask the Location Manager for the one that best satisfies our criteria.
+//              * By passing the 'true' boolean we ask for the best available (enabled) provider. */
+//         bestAvailableProvider = locationManager.getBestProvider(criteria, true)
+//     }
+//
+//     /* Activates this provider. This provider will notify the supplied listener
+//          * periodically, until you call deactivate().
+//          * This method is automatically invoked by enabling my-location layer. */
+//     override fun activate(listener: LocationSource.OnLocationChangedListener) {
+//         // We need to keep a reference to my-location layer's listener so we can push forward
+//         // location updates to it when we receive them from Location Manager.
+//         mListener = listener
+//
+//         // Request location updates from Location Manager
+//         if (bestAvailableProvider != null) {
+//             if (mContext?.let {
+//                     ActivityCompat.checkSelfPermission(
+//                         it,
+//                         Manifest.permission.ACCESS_FINE_LOCATION
+//                     )
+//                 }  != PackageManager.PERMISSION_GRANTED
+//             ) {
+//                 return
+//             }
+//             locationManager.requestLocationUpdates(
+//                 bestAvailableProvider!!,
+//                 minTime.toLong(),
+//                 minDistance.toFloat(),
+//                 this
+//             )
+//         }
+//     }
+//
+//     /* Deactivates this provider.
+//          * This method is automatically invoked by disabling my-location layer. */
+//     override fun deactivate() {
+//         // Remove location updates from Location Manager
+//         locationManager.removeUpdates(this)
+//         mListener = null
+//     }
+//
+//     override fun onLocationChanged(location: Location) {
+//         /* Push location updates to the registered listener..
+//              * (this ensures that my-location layer will set the blue dot at the new/received location) */
+//         if (mListener != null) {
+//             mListener!!.onLocationChanged(location)
+//         }
+//
+//         /* ..and Animate camera to center on that location !
+//              * (the reason for we created this custom Location Source !) */
+//         map.animateCamera(
+//             CameraUpdateFactory.newLatLng(LatLng(location.latitude, location.longitude))
+//         )
+//
+//
+//     }
+//
+//     override fun onStatusChanged(s: String?, i: Int, bundle: Bundle?) {}
+//
+//     init {
+//         // Get reference to Location Manager
+//         locationManager = mContext?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//
+//         // Specify Location Provider criteria
+//         criteria.accuracy = Criteria.ACCURACY_FINE
+//         criteria.powerRequirement = Criteria.POWER_LOW
+//         criteria.isAltitudeRequired = true
+//         criteria.isBearingRequired = true
+//         criteria.isSpeedRequired = true
+//         criteria.isCostAllowed = true
+//     }
+// }
+//
+// /////////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////
+//
