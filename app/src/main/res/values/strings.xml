@@ -1,10 +1,21 @@
 <resources>
     <string name="app_name">CAir</string>
     <string name="title_activity_maps">Map</string>
-    <string name="city_or_station_name">City or Station name</string>
-    <string name="ok">OK</string>
     <string name="loading">Loading...</string>
     <string name="tip_of_the_day">Tip of the day</string>
     <string name="search">Search Location</string>
     <string name="api_key">AIzaSyDvabeJOdIEVJUCKznpCwuGlutGW27PuBQ</string>
+    <string name="coordinates">lat/lng</string>
+    <string name="city">city</string>
+    <string name="good">Air quality is considered satisfactory, and air pollution poses little or no risk.</string>
+    <string name="moderate">Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution. Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.</string>
+    <string name="unhealthySensitiveGroups">Members of sensitive groups may experience health effects. The general public is not likely to be affected. Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.</string>
+    <string name="unhealthy">Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects. Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion.</string>
+    <string name="veryUnhealthy">Health warnings of emergency conditions. The entire population is more likely to be affected. Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.</string>
+    <string name="hazardous">	Health alert: everyone may experience more serious health effects. Everyone should avoid all outdoor exertion.</string>
+    <string name="Error">Something went wrong!Please try again!</string>
+    <string name="pressure">pressure:</string>
+    <string name="wind">wind:</string>
+    <string name="humidity">humidity:</string>
+    <string name="temprature">temprature:</string>
 </resources>

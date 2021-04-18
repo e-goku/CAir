@@ -12,10 +12,10 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green"
-        app:tabIndicator="@color/blue_light"
-        app:tabSelectedTextColor="@color/blue_light"
-        app:tabTextColor="@color/grey_light">
+        android:background="@color/petrol"
+        app:tabIndicator="@color/turquoise"
+        app:tabSelectedTextColor="@color/turquoise"
+        app:tabTextColor="@color/petrol_light">
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager

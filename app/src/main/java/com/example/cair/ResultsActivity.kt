@@ -1,11 +1,11 @@
 package com.example.cair
 
 import android.os.Bundle
-import android.provider.AlarmClock
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.cair.adapters.FragmentAdapter
 import com.google.android.material.tabs.TabLayout
+
 
 class ResultsActivity : AppCompatActivity() {
     lateinit var tabLayout: TabLayout
@@ -13,13 +13,12 @@ class ResultsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
-
-
-
+        
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
         tabLayout.addTab(tabLayout.newTab().setText("AIR QUALITY"))
-        tabLayout.addTab(tabLayout.newTab().setText("GRAPHS"))
+        tabLayout.addTab(tabLayout.newTab().setText("WEATHER"))
+        tabLayout.addTab(tabLayout.newTab().setText("FORECAST"))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val adapter = FragmentAdapter(this, supportFragmentManager,
             tabLayout.tabCount)
@@ -34,9 +33,11 @@ class ResultsActivity : AppCompatActivity() {
         })
     }
 
-     fun getMyData(): String? {
-        return intent.getStringExtra(AlarmClock.EXTRA_MESSAGE)
-    }
+     fun getMyData(): Pair<String?, String?> {
+         val location =  intent.getStringExtra("EXTRA_LOCATION")
+         val isChecked =  intent.getStringExtra("EXTRA_BOOLEAN")
+         return Pair(location, isChecked)
+     }
 }
 
 

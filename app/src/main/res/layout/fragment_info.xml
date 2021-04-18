@@ -3,89 +3,226 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/cair"
     android:id="@+id/root_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/city2"
     tools:context=".fragments.InfoFragment">
 
-<!--        <View android:id="@+id/anim_background"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/tip"
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/aqi"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            tools:text="" />
-
-                </LinearLayout>
-        </ScrollView>
-
-
-        <ImageView
-            android:id="@+id/tip"
-            android:layout_width="362dp"
-            android:layout_height="274dp"
-            android:src="@drawable/sticker2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.964" />
+            tools:text="City" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/city"
+            tools:text="time" />
+
+
+
+        <TextView
+            android:id="@+id/aqi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:textSize="80sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time"
+            tools:text="AQI" />
+
+        <TextView
+            android:id="@+id/aqiInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="40sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aqi"
+            tools:text="AQIINFO" />
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aqiInfo"
+            tools:text="INFOOOOOOOOO" />
+
+
+        <TextView
+            android:id="@+id/pm25"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info"
+            tools:text="PM25" />
+
+        <TextView
+            android:id="@+id/pm25info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/turquoise"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pm25"
+            tools:text="PM25info" />
+
+        <TextView
+            android:id="@+id/pm10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/pm25"
+            app:layout_constraintTop_toBottomOf="@+id/info"
+            tools:text="PM10" />
+
+        <TextView
+            android:id="@+id/pm10info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/turquoise"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/pm25"
+            app:layout_constraintTop_toBottomOf="@+id/pm10"
+            tools:text="PM25info" />
+
+        <TextView
+            android:id="@+id/no2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/pm10"
+            app:layout_constraintTop_toBottomOf="@+id/info"
+            tools:text="NO2" />
+
+        <TextView
+            android:id="@+id/no2info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/turquoise"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/pm10"
+            app:layout_constraintTop_toBottomOf="@+id/no2"
+            tools:text="NO2info" />
+
+        <TextView
+            android:id="@+id/o3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/no2"
+            app:layout_constraintTop_toBottomOf="@+id/info"
+            tools:text="O3: " />
+
+        <TextView
+            android:id="@+id/o3info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/turquoise"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/no2"
+            app:layout_constraintTop_toBottomOf="@+id/o3"
+            tools:text="O3info" />
+
+        <TextView
+            android:id="@+id/so2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/o3"
+            app:layout_constraintTop_toBottomOf="@+id/info"
+            tools:text="SO2" />
+
+        <TextView
+            android:id="@+id/so2info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/turquoise"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/o3"
+            app:layout_constraintTop_toBottomOf="@+id/so2"
+            tools:text="SO2info" />
+
+        <TextView
+            android:id="@+id/co"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/so2"
+            app:layout_constraintTop_toBottomOf="@+id/info"
+            tools:text="CO" />
+
+        <TextView
+            android:id="@+id/coinfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/turquoise"
+            android:textSize="23sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/so2"
+            app:layout_constraintTop_toBottomOf="@+id/co"
+            tools:text="COinfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="@drawable/clouds2"-->
-<!--    android:padding = "16dp"-->
-<!--    tools:context=".fragments.InfoFragment">-->
-
-
-<!--        <ScrollView-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:background="@color/white"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintBottom_toStartOf="parent">-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/textView"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    tools:text="" />-->
-
-<!--            </LinearLayout>-->
-<!--        </ScrollView>-->
-
-
-
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
