@@ -37,6 +37,20 @@
             app:layout_constraintTop_toBottomOf="@id/city"
             tools:text="time" />
 
+        <TextView
+            android:id="@+id/attributions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time"
+            tools:text="attributions" />
+
 
 
         <TextView
@@ -47,7 +61,7 @@
             android:layout_marginTop="24dp"
             android:textSize="80sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/time"
+            app:layout_constraintTop_toBottomOf="@+id/attributions"
             tools:text="AQI" />
 
         <TextView
