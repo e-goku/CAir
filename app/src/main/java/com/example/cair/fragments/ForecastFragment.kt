@@ -86,7 +86,8 @@ class ForecastFragment : Fragment() {
                                 min.add(BarEntry(i.toFloat(), minArray[i].toFloat()))
                                 max.add(BarEntry(i.toFloat(), maxArray[i].toFloat()))
                             }
-                            val k = response.getJSONObject("data").getJSONObject("forecast").getJSONObject("daily").getJSONArray("pm25").length() + 1
+                            val k = response.getJSONObject("data").getJSONObject("forecast")
+                                .getJSONObject("daily").getJSONArray("pm25").length() + 1
                             avg.add(BarEntry(k.toFloat(), 0f))
                             min.add(BarEntry(k.toFloat(), 0f))
                             max.add(BarEntry(k.toFloat(), 0f))

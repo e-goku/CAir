@@ -38,22 +38,6 @@
             tools:text="time" />
 
         <TextView
-            android:id="@+id/attributions"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/petrol_light"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/time"
-            tools:text="attributions" />
-
-
-
-        <TextView
             android:id="@+id/aqi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -61,7 +45,7 @@
             android:layout_marginTop="24dp"
             android:textSize="80sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/attributions"
+            app:layout_constraintTop_toBottomOf="@+id/time"
             tools:text="AQI" />
 
         <TextView
@@ -238,5 +222,19 @@
             app:layout_constraintStart_toEndOf="@+id/so2"
             app:layout_constraintTop_toBottomOf="@+id/co"
             tools:text="COinfo" />
+
+        <TextView
+            android:id="@+id/attributions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/petrol_light"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pm25info"
+            tools:text="attributions" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

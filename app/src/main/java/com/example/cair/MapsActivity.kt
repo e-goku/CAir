@@ -60,7 +60,7 @@
          binding.goButton.setOnClickListener { searchResults() }
 
 
-         //Handles the keyboard action button
+         /**Handles the keyboard action button*/
          findViewById<EditText>(R.id.location_edit_text).setOnEditorActionListener { _, actionId, _ ->
              return@setOnEditorActionListener when (actionId) {
                  EditorInfo.IME_ACTION_SEARCH -> {
@@ -107,10 +107,6 @@
      /**
       * Manipulates the map once available.
       * This callback is triggered when the map is ready to be used.
-      * This is where we can add markers or lines, add listeners or move the camera.
-      * If Google Play services is not installed on the device, the user will be prompted to install
-      * it inside the SupportMapFragment. This method will only be triggered once the user has
-      * installed Google Play services and returned to the app.
       */
      override fun onMapReady(googleMap: GoogleMap?) {
          map = googleMap ?: return
@@ -131,7 +127,7 @@
      }
 
      /**
-      * Called when the user taps the OK button
+      * Called when the user taps the GO button
       * checks if the string in the text field is empty
       * if is send message "Location cannot be empty"
       * if not calls fun sendCityName()
